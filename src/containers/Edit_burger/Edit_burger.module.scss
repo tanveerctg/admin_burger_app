@@ -1,0 +1,87 @@
+.form{
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 450px;
+  margin-top:3rem;
+  margin-bottom: 3rem;
+}
+.form > div{
+  margin-bottom:1.4rem;
+  display: grid;
+  justify-items: start;
+}
+.form>div input,textarea,select{
+  width:100%;
+  display: block;
+  padding:1rem;
+  border:2px solid black;
+  transition: all .3s;
+  font-size: 1.1rem;
+
+}
+
+.form>div select:focus{
+  border:2px solid blueviolet;
+}
+.form>div input:focus{
+  border:2px solid blueviolet;
+}
+.form textarea:focus{
+  border:2px solid blueviolet;
+}
+.form >div >label{
+  position:relative;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all .3s;
+  left:1rem;
+  font-weight: 700;
+}
+.form>div input:not(:placeholder-shown)+label{
+  opacity:1;
+  transform: translateY(-390%);
+}
+.form>div input:not(:placeholder-shown){
+  border:2px solid blueviolet;
+}
+.form input[type="submit"]{
+  margin-top:0;
+  background: blueviolet;
+  color: whitesmoke;
+  font-size: 1.5rem;
+  letter-spacing: .3rem;
+  height:4.8rem;
+  transition: all .3s;
+
+}
+.form input[type="submit"]:hover{
+  background: rgb(70, 12, 124);
+  cursor: pointer;
+}
+.form textarea{
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.form textarea + label{
+  transform: translateY(-305%);
+  opacity:0;
+}
+.form textarea:not(:placeholder-shown)+label{
+  opacity:1;
+  transform: translateY(-770%);
+}
+.form textarea:not(:placeholder-shown){
+  border:2px solid blueviolet;
+}
+.removeBtn{
+  position: absolute;
+  top:3px;
+  left:3px;
+  background: white;
+  border:none;
+  padding:8px;
+  cursor: pointer;
+}
+.removeBtn:hover{
+  background: rgb(236, 236, 236);
+}

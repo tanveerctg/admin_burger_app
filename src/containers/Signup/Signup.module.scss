@@ -1,0 +1,199 @@
+.signinContainer{
+  position: fixed;
+  top:0;
+  left:0;
+  height:100vh;
+  width:100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.signin{
+  background:whitesmoke;
+  padding:40px 30px 0 30px;
+  margin-bottom: 1.5rem;
+}
+.loaderContainer{
+  position: fixed;
+  height:100vh;
+  z-index: 10;
+  top:0;
+  left:0;
+  width:100%;
+  background: #f4f9f4;
+}
+.container{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  justify-content: center;
+  background: #f4f9f4;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 3px 3px 0px #e7e7e7,8px 8px 5px #e7e7e7;
+}
+.button{
+  width:20rem;
+  display:block;
+  border:none;
+  transition: all .3s;
+  padding:.8rem;
+  border-radius:5px;
+  position: relative;
+  
+}
+.facebook{
+  background: #3C5A99;
+  color:white;
+}
+.google{
+  background: red;
+  color:white;
+  margin-bottom: 1.5rem;
+}
+.fb_icon{
+  font-size: 2rem;
+  left:1rem;
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+}
+.google_icon{
+  font-size: 2rem;
+  left:1rem;
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+}
+.textFacebook{
+  font-size: 1.2rem;
+  letter-spacing: .02cm;
+  margin-left: 2rem;
+}
+.textGoogle{
+  font-size: 1.2rem;
+  letter-spacing: .02cm;
+  margin-left: .5rem;
+}
+.button:hover{
+  background:#dfdfdf;
+  cursor: pointer;
+}
+.button:hover .fb_icon{
+  color:#3C5A99;
+}
+.button:hover .google_icon{
+  color:red;
+}
+.button:hover .textFacebook{
+  color:#3C5A99;
+}
+.button:hover .textGoogle{
+  color:red;
+}
+.or{
+  display:grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  grid-gap:.7rem;
+  color:black;
+}
+.or::before{
+  content: "";
+  background-image: linear-gradient(to left,black,transparent);
+  height:1px;
+  display: grid;
+  align-items: end;
+}
+.or::after{
+  content: "";
+  height:1px;
+  background-image: linear-gradient(to right,black,transparent);
+  height:1px;
+  display: grid;
+  align-items: end;
+}
+.emailHandler{
+  background: black;
+  border:none;
+  transition: all .3s;
+  padding:.5rem;
+  border-radius:5px;
+  font-size: 1rem;
+  color:white;
+  margin-bottom: 2.7rem;
+}
+.emailHandler:hover{
+  background:#dfdfdf;
+  color:black;
+  cursor: pointer;
+}
+
+.inputContainer{
+  display: grid;
+  justify-items: start;
+  
+}
+.inputContainer:first-child{
+  margin-bottom:1.2rem;
+}
+.inputContainer input{
+  width:17.5rem;
+  display: block;
+  padding:1rem;
+  border:2px solid black;
+  transition: all .3s;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  margin-bottom: 0;
+}
+.inputContainer input:focus{
+  border:2px solid blueviolet;
+}
+.inputContainer >label{
+  position:relative;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all .3s;
+  font-weight: 700;
+}
+.inputContainer input:not(:placeholder-shown)+label{
+  opacity:1;
+  transform: translateY(-390%);
+}
+.inputContainer input:not(:placeholder-shown){
+  border:2px solid blueviolet;
+}
+.signInBtn{
+  background: #45CE30;
+  border:none;
+  transition: all .3s;
+  padding:.5rem;
+  border-radius:5px;
+  font-size: 1rem;
+  color:white;
+  margin-bottom: 2rem;
+  width:100%;
+}
+.signInBtn:hover{
+  background: rgb(14, 172, 14);
+  cursor: pointer;
+}
+.errMsg{
+  display: grid;
+  justify-items: center;
+  align-items: end;
+  color:red;
+}
+.signupLink{
+  text-decoration: none;
+  margin-left: 5px;
+  color:#155e63;
+}
+.signupLink:hover{
+  color:red;
+}
