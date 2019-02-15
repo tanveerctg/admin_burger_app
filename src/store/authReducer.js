@@ -1,6 +1,7 @@
 
 let initialState={
-  id:null
+  id:null,
+  registration:null
 };
 const authReducer=(state=initialState,action)=>{
   switch(action.type){
@@ -14,6 +15,12 @@ const authReducer=(state=initialState,action)=>{
       return {
         ...state,
         id:null
+      }
+    }
+    case 'REGISTRATION':{
+      return {
+        ...state,
+        registration:action.registration
       }
     }
 

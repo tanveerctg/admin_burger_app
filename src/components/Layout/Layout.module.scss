@@ -1,20 +1,22 @@
 .header{
-  background: #dddddd;
+  background: #eeeeee;
   position: relative;
 }
 .header button{
   position: absolute;
   right:3rem;
   top:10px;
-  background: rgb(247, 41, 41);
+  background: none;
   padding: 9px 8px 9px 8px;
-  border:none;
+  border:2px solid rgb(160, 160, 160);
   font-weight: 700;
-  color:white;
+  color:rgb(160, 160, 160);
   cursor: pointer;
+  transition: all .2s;
 }
 .header button:hover{
-  background: rgb(255, 90, 90)
+  border:2px solid black;
+  color:black;
 }
 .navbar{
   background: rgba(0, 0, 0, 0.801);
@@ -43,4 +45,17 @@
   display:grid;
   grid-template-columns: 210px 10fr;
   height:100vh;
+}
+@media only screen and (max-width: 700px) {
+  .content_container{
+    grid-template-columns: 1fr;
+    grid-template-rows: 5rem auto;
+    height:100vh;
+  }
+  .navbar{
+    grid-template-columns:repeat(5,auto);
+    font-size: 14px;
+    grid-gap:10px;
+    grid-auto-flow: rows;
+  }
 }

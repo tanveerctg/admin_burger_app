@@ -13,9 +13,9 @@ import {firebase} from './firebase/firebase';
 import dispatchInitialState from './store/Actions/InitialState';
 import {signIn,signOut} from './store/Actions/auth';
 import { faCode, faHighlighter,faMoneyBill ,faEnvelope, faThumbsUp,faCheckCircle,faTimes,faTimesCircle} from "@fortawesome/free-solid-svg-icons";
-
 import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
 import { library } from '@fortawesome/fontawesome-svg-core';
+
 library.add(
   faMoneyBill,
   faCode,
@@ -57,7 +57,9 @@ let checker=true;
       }
       });
 
-
+      firebase.database().ref().child("Registration").on('value',(snap)=>{
+            store.dispatch({type:'REGISTRATION',registration:`${snap.val().status}`});
+      })
 
 
 // If you want your app to work offline and load faster, you can change

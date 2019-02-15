@@ -44,12 +44,15 @@ class Signin extends Component {
     });
   }
   render() {
- 
+    console.log(typeof this.props.registration)
     let loading=this.state.loading;
     return(
       loading ?<div className={classes.loaderContainer}> <Loader/> </div>:
         <div className={classes.signinContainer}>
-              <Link to="/signup"><button className={classes.register}>Register</button></Link>
+              {
+                this.props.registration=='on' &&<Link to="/signup"><button className=
+                {classes.register}>Register</button></Link>
+              }
               <div className={classes.signin}>
                 <div className={classes.inputContainer}>  
                   <input 
@@ -76,5 +79,10 @@ class Signin extends Component {
     }        
   }
 
+  const mapStateToProps=state=>{
+    return{
+      registration:state.authReducer.registration
+    }
+  }
 
-export default connect()(Signin);
+export default connect(mapStateToProps)(Signin);

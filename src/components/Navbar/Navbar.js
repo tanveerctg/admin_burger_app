@@ -26,10 +26,17 @@ const Navbar=()=>{
         }}>Add Admin</NavLink>
 
          <NavLink to="/all_Burgers" className={classes.navLink}  activeStyle={{
-        fontWeight: "bold",
+          fontWeight: "bold",
           color: "yellow",
           textDecoration: 'none'
         }}>All Burgers</NavLink>
+
+        <NavLink to="/settings" className={classes.navLink}  activeStyle={{
+          fontWeight: "bold",
+          color: "yellow",
+          textDecoration: 'none'
+        }}>Settings
+        </NavLink>
     </Aux>
   )
 }

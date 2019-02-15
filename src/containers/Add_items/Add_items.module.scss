@@ -121,3 +121,8 @@
 .form>div select.invalid+label+svg+svg{
   opacity:1;
 }
+@media only screen and (max-width: 550px) {
+  .form{
+    grid-template-columns: 350px;
+  } 
+}
