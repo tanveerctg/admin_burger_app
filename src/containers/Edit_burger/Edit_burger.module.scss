@@ -20,15 +20,15 @@
 
 }
 
-.form>div select:focus{
-  border:2px solid blueviolet;
-}
+// .form>div select:focus{
+//   border:2px solid blueviolet;
+// }
 .form>div input:focus{
   border:2px solid blueviolet;
 }
-.form textarea:focus{
-  border:2px solid blueviolet;
-}
+// .form textarea:focus{
+//   border:2px solid blueviolet;
+// }
 .form >div >label{
   position:relative;
   transform: translateY(-100%);
@@ -36,14 +36,15 @@
   transition: all .3s;
   left:1rem;
   font-weight: 700;
+  
 }
 .form>div input:not(:placeholder-shown)+label{
   opacity:1;
   transform: translateY(-390%);
 }
-.form>div input:not(:placeholder-shown){
-  border:2px solid blueviolet;
-}
+// .form>div input:not(:placeholder-shown){
+//   border:2px solid blueviolet;
+// }
 .form input[type="submit"]{
   margin-top:0;
   background: blueviolet;
@@ -61,14 +62,20 @@
 .form textarea{
   font-weight: 700;
   font-size: 1.2rem;
+  height:5rem;
 }
 .form textarea + label{
-  transform: translateY(-305%);
+  transform: translateY(-100%);
   opacity:0;
+}
+
+.form textarea:not(:placeholder-shown)+label{
+  opacity:1;
+  transform: translateY(-500%);
 }
 .form textarea:not(:placeholder-shown)+label{
   opacity:1;
-  transform: translateY(-770%);
+  transform: translateY(-500%);
 }
 .form textarea:not(:placeholder-shown){
   border:2px solid blueviolet;
@@ -84,4 +91,46 @@
 }
 .removeBtn:hover{
   background: rgb(236, 236, 236);
+}
+
+.form>div input.invalid{
+  border:2px solid red;
+}
+.form>div input.valid{
+  border:2px solid #6DB65B;
+}
+.form>div select.valid{
+  border:2px solid #6DB65B;
+}
+.form>div textarea.valid{
+  border:2px solid #6DB65B;
+}
+.form>div svg{
+ opacity:0;
+}
+.form>div input.valid+label+svg{
+  opacity:1;
+}
+.form>div input.invalid+label+svg+svg{
+  opacity:1;
+}
+
+.form>div textarea.valid+label+svg{
+  opacity:1;
+}
+.form>div textarea.invalid+label+svg+svg{
+  opacity:1;
+}
+
+.form>div select.valid+label+svg{
+  opacity:1;
+}
+.form>div select.invalid+label+svg+svg{
+  opacity:1;
+}
+@media only screen and (max-width: 550px) {
+  .form{
+    grid-template-columns: 380px;
+  }
+
 }

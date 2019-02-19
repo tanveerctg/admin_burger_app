@@ -4,7 +4,7 @@ import {firebase} from '../../firebase/firebase';
 import Loader from '../../components/UI/Loader/Loader';
 import {connect} from 'react-redux';
 import { reject } from 'rsvp';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
  class Edit_burger extends Component {
   state={
       name:null,
@@ -32,39 +32,82 @@ import { reject } from 'rsvp';
 
   // }
   nameChangeHandler=(e)=>{
-
-    this.setState({name:e.target.value});
+    const regEx=/^[a-z\s?_?,?]+$/gi;
+    console.log(e.target.value)
+    if(e.target.value.length!==null){
+      if(regEx.test(e.target.value)){
+        this.setState({name:e.target.value});
+        e.target.className=classes.valid;
+      }else{
+        this.setState({name:null});
+        e.target.className=classes.invalid;
+      }
+    }
+      
     e.preventDefault();
   }
   typeChangeHandler=(e)=>{
-
-    this.setState({type:e.target.value});
-    e.preventDefault();
+    const regEx=/^[a-z\s?_?,?]{3,25}$/gi;
+    if(e.target.value!==null){
+      if(regEx.test(e.target.value)){
+        this.setState({type:e.target.value});
+        e.target.className=classes.valid;
+      }else{
+        this.setState({type:null});
+        e.target.className=classes.invalid;
+      }
+    }
   }
   priceChangeHandler=(e)=>{
+    const regEx=/^\d{3,4}$/gi;
+    if(e.target.value!==null){
+      if(regEx.test(e.target.value)){
+        this.setState({price:e.target.value});
+        e.target.className=classes.valid;
+      }else{
+        this.setState({price:null});
+        e.target.className=classes.invalid;
+      }
+    }
     
-    this.setState({price:e.target.value});
     e.preventDefault();
   }
   caloriesChangeHandler=(e)=>{
-
-    this.setState({calories:e.target.value});
+    const regEx=/^\d+$/gi;
+    if(e.target.value!==null){
+      if(regEx.test(e.target.value)){
+        this.setState({calories:e.target.value});
+        e.target.className=classes.valid;
+      }else{
+        this.setState({calories:null});
+        e.target.className=classes.invalid;
+      }
+    }
     e.preventDefault();
   }
   descriptionChangeHandler=(e)=>{
-  
-    this.setState({description:e.target.value});
+    const regEx=/.+/gi;
+    if(e.target.value!==null){
+      if(regEx.test(e.target.value)){
+        this.setState({description:e.target.value});
+        e.target.className=classes.valid;
+      }else{
+        this.setState({description:null});
+        e.target.className=classes.invalid;
+      }
+    }  
     e.preventDefault();
   }
+
   handleSubmit=(e)=>{
     const {name,type,description,calories,url,price,status,id,imgName}=this.state;
-
+  
     if(name && type && price && description && calories && url && status && imgName){ 
       this.setState({wholeLoading:true});
       this.setState({error:false});
   
       let data={id,name,type,description,calories,url,price,status,imgName};
-
+  
       firebase.database().ref('All Burgers').child(`${id}`).update(data).then(()=>{
         this.props.dispatch({type:'EDIT_ITEM',updatedItem:data})
         this.setState({url:null})
@@ -82,19 +125,18 @@ import { reject } from 'rsvp';
       resolve(this.setState({img:e.target.files[0]}))
     });
     promise.then(()=>{
-      if(this.state.img.name !== this.state.imgName){
-        firebase.storage().ref(`images/${this.state.imgName}`).delete();
+      if(!!this.state.img){
+        this.setState({imgName:this.state.img.name});
         const uploadTask=firebase.storage().ref(`images/${this.state.img.name}`).put(this.state.img);
          uploadTask.on('state_changed',(snapshot)=>{
-         this.setState({loading:true});
-         
+        
+         this.setState({loading:true})
         },
         (e)=>{console.log(e)},
         ()=>{
           firebase.storage().ref(`images/${this.state.img.name}`).getDownloadURL().then(name=>{
             this.setState({url:name})
             this.setState({loading:false})
-            this.setState({imgName:this.state.img.name})
           })
         }
       )
@@ -103,7 +145,7 @@ import { reject } from 'rsvp';
 
   }
   remove=()=>{
-    const name=this.state.imgName;
+    const name=this.state.img.name;
     this.setState({loading:true})
     firebase.storage().ref(`images/${name}`).delete().then(()=>{
       this.setState({loading:false})
@@ -111,8 +153,21 @@ import { reject } from 'rsvp';
     });
   }
   handleChange=(e)=>{
-    this.setState({status:e.target.value});
+    const regEx=/[available|stockOut]/gi;
+
+    if(e.target.value!==null){
+      if(regEx.test(e.target.value)){
+        this.setState({status:e.target.value});
+        e.target.className=classes.valid;
+
+      }else{
+        this.setState({status:null});
+        e.target.className=classes.invalid;
+      }
+    }
+
     e.preventDefault();
+ 
   }
   componentDidMount(){
     if(this.props.burger){
@@ -133,7 +188,7 @@ import { reject } from 'rsvp';
 
       :
       <form onSubmit={this.handleSubmit} className={classes.form}>
-          <div style={{position:'relative'}}>
+          <div style={{position:'relative',width:'81%'}}>
             {!!this.state.loading?
               <Loader />
               :
@@ -145,37 +200,77 @@ import { reject } from 'rsvp';
             <input type="file" onChange={this.fileHandler} style={{marginBottom:'2rem'}}/>:
              null
            }
-            <div>    
+            <div style={{position:'relative',width:'100%'}}>    
                 <input 
                   placeholder="Name"
                   type="text"
                   onChange={this.nameChangeHandler}
-                  value={this.state.name?this.state.name:''}
+                  ref="googleInput"
+                  value={this.state.name}
+                  style={{width:'81%'}}
                 />
                 <label>Name</label>
+                <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="red"
+                />
             </div>
   
-            <div>    
+            <div style={{position:'relative',width:'100%'}}>    
                 <input 
                   placeholder="Type"
                   type="text"
                   onChange={this.typeChangeHandler}
-                  value={this.state.type?this.state.type:''}
+                  value={this.state.type}
+                  style={{width:'81%'}}
                 />
                 <label>Type</label>
+                <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="red"
+                />
             </div>
 
-            <div>    
+            <div style={{position:'relative',width:'100%'}}>    
               <input 
                 placeholder="Price"
-                type="number"
+                type="text"
                 onChange={this.priceChangeHandler}  
-                value={this.state.price?this.state.price:''}
+                value={this.state.price}
+                style={{width:'81%'}}
               />
               <label>price</label>
+              <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="red"
+                />
             </div>
-            <div > 
-              <select onChange={this.handleChange} >
+            <div style={{position:'relative',width:'100%'}}> 
+              <select onChange={this.handleChange} style={{width:'81%'}}>
                 {!this.state.status?
                   <option default value="">Status</option>
                   :null
@@ -184,33 +279,70 @@ import { reject } from 'rsvp';
                 <option value="stockOut" >Stock Out</option>
               </select>
               {!this.state.status?
-                  null
+                <label style={{transform: 'translateY(-100%)',opacity:'0',transition: 'all .3s(-390%)'}}>Status</label>
                :<label style={{opacity:'1',transform: 'translateY(-390%)'}}>Status</label>
               } 
+              <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="red"
+                />
             </div>
-            <div>    
+            <div style={{position:'relative',width:'100%'}}>    
               <input 
                 placeholder="Calories"
-                type="number"
+                type="text"
                 onChange={this.caloriesChangeHandler}  
-                value={this.state.calories?this.state.calories:''}
-  
+                value={this.state.calories}
+                style={{width:'81%'}}
               />
               <label>Calories</label>
+              <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="red"
+                />
             </div>
            
-            <div>    
+            <div style={{position:'relative',width:'100%'}}>    
              <textarea 
                 placeholder="Description"
                 type="text"
                 onChange={this.descriptionChangeHandler}  
                 rows="4"  
-                value={this.state.description?this.state.description:''}  
+                value={this.state.description}  
+                style={{width:'81%'}}
               />
               <label>Description</label>
+              <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
+                  size="2x"
+                  color="red"
+                />
             </div>
      
-            <input type="submit" value="Order" />
+            <input type="submit" value="Edit Item" style={{width:'81%'}}/>
             {
               this.state.error && <p style={{background:'red',color:'white',fontSize:'1.3rem',padding:'4px',borderRadius:'3px',marginTop:'1rem'}}>Please fill in all fields</p>
             } 
@@ -226,3 +358,5 @@ const mapStateToProps=(state,props)=>{
 }
 
 export default connect(mapStateToProps)(Edit_burger);
+
+

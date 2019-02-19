@@ -27,7 +27,7 @@ class Settings extends Component {
           <div className={classes.registrationName}>
             <h3>Registration</h3>
           </div>
-          <ul class={classes.tour_group}>
+          <ul class={classes.ul}>
               <li>
                 <input
                   type="radio"

@@ -4,9 +4,13 @@ import classes from './Layout.module.scss';
 import {firebase} from '../../firebase/firebase';
 import Navbar from '../Navbar/Navbar';
 import { withRouter } from "react-router";
+import { Scrollbars } from 'react-custom-scrollbars';
 const Layout=(props)=>{
   
   return(
+    <Scrollbars style={{ width: '100vw', height: '100vh' }} renderThumbVertical={({ style, ...props }) =>
+    <div {...props} style={{ ...style, backgroundColor: 'black',width:'4',opacity: '0.5'}}/>
+}>
     <div className={classes.container}>
       <div className={classes.header}>
            <button onClick={()=>{firebase.auth().signOut().then(()=>{
@@ -18,6 +22,7 @@ const Layout=(props)=>{
         {props.children}
       </main>
     </div>
+    </Scrollbars>
   )
 
   }

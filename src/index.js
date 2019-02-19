@@ -26,7 +26,8 @@ library.add(
   faThumbsUp,
   faCheckCircle,
   faTimes,
-  faTimesCircle
+  faTimesCircle,
+  faAngleDown
   // more icons go here
 );
 

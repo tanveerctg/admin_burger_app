@@ -119,7 +119,7 @@ class All_burgers extends Component {
         loading ?
           <Loader />
           :
-        <div style={{padding:'20px'}}>
+        <div style={{padding:'7px'}}>
                   {this.state.selectAllCheckBox && this.props.all_burgers.length>0?<button onClick={this.removeAll} style={{background:'#ff8162',color:'white',border:'none',width:'100%',marginBottom:'1rem',padding:'10px',fontWeight:'700',fontSize:'1.1rem',cursor:'pointer'}} >Remove All</button>:null}
                   
                   {this.state.enableRmv && !this.state.selectAllCheckBox?<button style={{background:'#ff8162',color:'white',border:'none',width:'100%',marginBottom:'1rem',padding:'10px',fontWeight:'700',fontSize:'1.1rem',cursor:'pointer'}} onClick={this.removeSelectedItm}>Remove</button>:null}

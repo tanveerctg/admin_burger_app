@@ -36,6 +36,7 @@
   transition: all .3s;
   left:1rem;
   font-weight: 700;
+  
 }
 .form>div input:not(:placeholder-shown)+label{
   opacity:1;
@@ -61,14 +62,16 @@
 .form textarea{
   font-weight: 700;
   font-size: 1.2rem;
+  height:5rem;
 }
 .form textarea + label{
-  transform: translateY(-305%);
+  transform: translateY(-100%);
   opacity:0;
 }
+
 .form textarea:not(:placeholder-shown)+label{
   opacity:1;
-  transform: translateY(-770%);
+  transform: translateY(-500%);
 }
 .form textarea:not(:placeholder-shown){
   border:2px solid blueviolet;
@@ -123,6 +126,7 @@
 }
 @media only screen and (max-width: 550px) {
   .form{
-    grid-template-columns: 350px;
-  } 
+    grid-template-columns: 380px;
+  }
+
 }

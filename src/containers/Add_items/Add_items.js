@@ -23,7 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
       imgName:''
   }
   nameChangeHandler=(e)=>{
-    const regEx=/^[a-z\s?_?]{6,15}$/gi;
+    const regEx=/^[a-z\s?_?,?]+$/gi;
     if(e.target.value!==null){
       if(regEx.test(e.target.value)){
         this.setState({name:e.target.value});
@@ -36,7 +36,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
     e.preventDefault();
   }
   typeChangeHandler=(e)=>{
-    const regEx=/^[a-z\s?_?]{6,15}$/gi;
+    const regEx=/^[a-z\s?_?,?]{3,25}$/gi;
     if(e.target.value!==null){
       if(regEx.test(e.target.value)){
         this.setState({type:e.target.value});
@@ -54,7 +54,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
         this.setState({price:e.target.value});
         e.target.className=classes.valid;
       }else{
-        this.setState({pric:null});
+        this.setState({price:null});
         e.target.className=classes.invalid;
       }
     }
@@ -168,7 +168,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
       :
       <form onSubmit={this.handleSubmit} className={classes.form}>
-          <div style={{position:'relative',width:'90%'}}>
+          <div style={{position:'relative',width:'81%'}}>
             {!!this.state.loading?
               <Loader />
               :
@@ -185,7 +185,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
                   placeholder="Name"
                   type="text"
                   onChange={this.nameChangeHandler}
-                  style={{width:'90%'}}
+                  style={{width:'81%'}}
                 />
                 <label>Name</label>
                 <FontAwesomeIcon
@@ -208,7 +208,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
                   placeholder="Type"
                   type="text"
                   onChange={this.typeChangeHandler}
-                  style={{width:'90%'}}
+                  style={{width:'81%'}}
                 />
                 <label>Type</label>
                 <FontAwesomeIcon
@@ -230,7 +230,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
                 placeholder="Price"
                 type="text"
                 onChange={this.priceChangeHandler} 
-                style={{width:'90%'}} 
+                style={{width:'81%'}} 
               />
               <label>price</label>
               <FontAwesomeIcon
@@ -246,8 +246,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
                   color="red"
                 />
             </div>
-            <div style={{position:'relative',width:'90%'}}> 
-              <select onChange={this.handleChange} >
+            <div style={{position:'relative',width:'100%'}}> 
+              <select onChange={this.handleChange} style={{width:'81%'}}>
                 {!this.state.status?
                   <option default value="">Status</option>
                   :null
@@ -261,13 +261,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
               } 
               <FontAwesomeIcon
                   icon={['fas','check-circle']}
-                  style={{display:'inlineBlock',position:'absolute',right:'-2.8rem',margin:'3% 0 0 2%'}}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
                   size="2x"
                   color="#6DB65B"
                 />
                  <FontAwesomeIcon
                   icon={['fas','times-circle']}
-                  style={{display:'inlineBlock',position:'absolute',right:'-2.8rem',margin:'3% 0 0 2%'}}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 2%'}}
                   size="2x"
                   color="red"
                 />
@@ -277,7 +277,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
                 placeholder="Calories"
                 type="text"
                 onChange={this.caloriesChangeHandler}  
-                style={{width:'90%'}}
+                style={{width:'81%'}}
               />
               <label>Calories</label>
               <FontAwesomeIcon
@@ -298,9 +298,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
              <textarea 
                 placeholder="Description"
                 type="text"
-                onChange={this.descriptionChangeHandler}  
-                rows="4"  
-                style={{width:'90%'}}  
+                onChange={this.descriptionChangeHandler}   
+                style={{width:'81%'}}  
               />
               <label>Description</label>
               <FontAwesomeIcon
@@ -317,7 +316,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
                 />
             </div>
      
-            <input type="submit" value="Add Item" style={{width:'90%'}}/>
+            <input type="submit" value="Add Item" style={{width:'81%'}}/>
             {
               this.state.error && <p style={{background:'red',color:'white',fontSize:'1.3rem',padding:'4px',borderRadius:'3px',marginTop:'1rem'}}>Please fill in all fields</p>
             } 
