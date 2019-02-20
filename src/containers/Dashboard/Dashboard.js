@@ -8,7 +8,6 @@ const Dashboard=()=>{
             <div className={classes.item}></div>
             <div className={classes.item}></div>
             <div className={classes.item}></div>
-            
           </div>
           <div className={classes.latestItems}></div>
       </div>

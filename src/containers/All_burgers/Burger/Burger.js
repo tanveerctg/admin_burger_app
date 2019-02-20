@@ -13,7 +13,8 @@ export default class Burger extends Component {
     checkedOrNot:false
   }
   link=()=>{
-    this.props.history.push({pathname:`edit_burger/${this.props.id}`,state:`${this.props.all_burger}`})
+
+    this.props.history.push({pathname:`edit_burger/${this.props.id}`,state:{...this.props.burgerInfo}})
   }
 
 
@@ -50,7 +51,7 @@ export default class Burger extends Component {
     }
   }
   render() {
-
+    
     const {id,checked,imgName}=this.props;
     return (
       <tbody>

@@ -32,7 +32,7 @@ class All_burgers extends Component {
     }
   }
   allItems=()=>{
-    return this.props.all_burgers.map((itm,index)=><Burger key={itm.id} {...itm} history={this.props.history} all_burger={this.props.all_burgers} index={index}  id={itm.id} enableRemoveBtn={this.enableRemoveBtn}
+    return this.props.all_burgers.map((itm,index)=><Burger key={itm.id} {...itm} history={this.props.history} burgerInfo={itm} index={index}  id={itm.id} enableRemoveBtn={this.enableRemoveBtn}
     disableRemoveBtn={this.disableRemoveBtn}
     imgName={itm.imgName}
     />)
