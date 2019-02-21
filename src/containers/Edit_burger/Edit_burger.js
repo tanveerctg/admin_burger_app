@@ -99,7 +99,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
       this.setState({error:false});
   
       let data={id,name,type,description,calories,url,price,status,imgName};
-      //EDIT BURGER APP FIRST
+
+      //EDIT BURGER APP ITEM FIRST
       console.log(id)
       fetch(`https://testing-bc79f.firebaseio.com/allBurgers.json`, {
         method: 'GET',

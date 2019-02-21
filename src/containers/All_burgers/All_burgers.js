@@ -100,8 +100,34 @@ class All_burgers extends Component {
           arrOfImgName.push(each.getAttribute('imgname'));
         } 
       })
+      //REMOVE SELECTED ITEM FROM BURGER APP
+
+      fetch(`https://testing-bc79f.firebaseio.com/allBurgers.json`, {
+        method: 'GET',
+        mode: "cors"
+      }).then(res=>{
+        return res.json();
+      }).then(info=>{
+        let allIds=Object.keys(info);
+        let remainingItems={};
+        allIds.forEach(id=>{
+          if(arrOfId.indexOf(info[id].id)>-1){
+            console.log('do nothing')
+          }else{
+            remainingItems[id]=info[id];
+          }
+        })
+        fetch(`https://testing-bc79f.firebaseio.com/allBurgers.json`, {
+          method: 'PUT',
+          mode: "cors",
+          body:JSON.stringify(remainingItems)
+        })
+      })
+
+
       arrOfId.forEach(id=>{
          firebase.database().ref(`All Burgers/${id}`).remove();
+      
       })
 
       arrOfImgName.forEach((imgName)=>{
