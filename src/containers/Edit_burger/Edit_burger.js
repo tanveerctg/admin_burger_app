@@ -99,7 +99,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
       this.setState({error:false});
   
       let data={id,name,type,description,calories,url,price,status,imgName};
-  
+      //EDIT BURGER APP FIRST
+      console.log(id)
+      fetch(`https://testing-bc79f.firebaseio.com/allBurgers.json`, {
+        method: 'GET',
+        mode: "cors"
+      }).then(res=>{
+        return res.json();
+      }).then(info=>{
+        let allData={...info};
+        console.log(allData)
+        for(let itm in info){
+          if(allData[itm].id == id){
+            allData[itm]=data;
+            fetch(`https://testing-bc79f.firebaseio.com/allBurgers.json`, {
+              method: 'PUT',
+              mode: "cors",
+              body:JSON.stringify(allData)
+            })
+           
+          }
+        }
+        console.log(allData)
+      })
       firebase.database().ref('All Burgers').child(`${id}`).update(data).then(()=>{
         this.props.dispatch({type:'EDIT_ITEM',updatedItem:data})
         this.setState({url:null})

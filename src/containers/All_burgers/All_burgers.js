@@ -67,7 +67,12 @@ class All_burgers extends Component {
       this.props.all_burgers.forEach(itm=>{
         allImages.push(itm.imgName);
       })
+  
+    
       firebase.database().ref('All Burgers').remove().then(()=>{
+        fetch(`https://testing-bc79f.firebaseio.com/allBurgers.json`, {
+          method: 'delete'
+        })
         allImages.forEach((imgName)=>{
           firebase.storage().ref(`images/${imgName}`).delete();
         })

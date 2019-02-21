@@ -99,11 +99,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
       firebase.database().ref('All Burgers').child(`${id}`).update(data).then(()=>{
         this.setState({wholeLoading:false})
         this.setState({url:null})
-        return data;
-      }).then((data)=>{
-        this.props.dispatch({type:'ADD_ITEM',newItem:data});
-        this.props.history.push('/all_Burgers')
+        return {data,id};
+      }).then(({data,id})=>{
+        
+        fetch(`https://testing-bc79f.firebaseio.com/allBurgers.json`, {
+          method: 'POST',
+          mode: "cors",
+          body:JSON.stringify(data)
+        }).then(()=>{
+          this.props.dispatch({type:'ADD_ITEM',newItem:data});
+          this.props.history.push('/all_Burgers');
+        }).catch(()=>{
+          console.log('err')
+        })
       });
+     
     }else{
       this.setState({error:true});
     }

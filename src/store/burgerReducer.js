@@ -4,7 +4,7 @@ const initialState=[]
 const burgerReducer=(state=initialState,action)=>{
   switch(action.type){
     case 'ADD_ITEM':{
-      console.log(state,action.newItem)
+ 
       return [...state,action.newItem]
     }
     case 'REMOVE_ALL':{
@@ -31,7 +31,6 @@ const burgerReducer=(state=initialState,action)=>{
         if(itm.id===action.updatedItem.id){
           return action.updatedItem;
         }else{
-          console.log(itm)
           return itm;
         }
       })
