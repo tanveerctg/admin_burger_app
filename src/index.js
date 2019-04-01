@@ -61,6 +61,16 @@ let checker=true;
             store.dispatch({type:'REGISTRATION',registration:`${snap.val().status}`});
       })
 
+      firebase.database().ref().child("orders").on('value',(snap)=>{
+
+            let info=[];
+            for(let user in snap.val()){
+                  for(let order in snap.val()[user]){
+                        info.push(snap.val()[user][order])
+                  }  
+            }
+            console.log(info);
+      })
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -100,6 +100,7 @@ class All_burgers extends Component {
           arrOfImgName.push(each.getAttribute('imgname'));
         } 
       })
+      
       //REMOVE SELECTED ITEM FROM BURGER APP
 
       fetch(`https://testing-bc79f.firebaseio.com/allBurgers.json`, {

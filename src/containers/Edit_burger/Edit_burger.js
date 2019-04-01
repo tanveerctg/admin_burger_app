@@ -190,7 +190,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   }
 
   render() {
-   
+    let allVal=['stockOut','new','available'];
+
     let {wholeLoading}=this.state;
     return (
       wholeLoading ? 
@@ -281,19 +282,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
                 />
             </div>
             <div style={{position:'relative',width:'100%'}}> 
-              <select onChange={this.handleChange} style={{width:'81%'}}>          
-                {this.state.status==="available"&&(
-                  <Aux>
-                    <option value="available" defaultValue>Available</option>
-                    <option value="stockOut" >Stock Out</option>
-                  </Aux>
-                )}
-                {this.state.status==="stockOut"&&(
-                  <Aux>
-                    <option value="stockOut" defaultValue>Stock Out</option>
-                    <option value="available">Available</option>
-                  </Aux>
-                )}
+              <select onChange={this.handleChange} style={{textTransform:'capitalize'}} style={{width:'81%'}}>
+                <option value={this.state.status} selected>{this.state.status}</option>
+                {
+                  allVal.map(name=>name!==this.state.status && <option value={name} style={{textTransform:'capitalize'}}>{name}</option>)
+                }
+
               </select>
               {!this.state.status?
                 <label style={{transform: 'translateY(-100%)',opacity:'0',transition: 'all .3s(-390%)'}}>Status</label>

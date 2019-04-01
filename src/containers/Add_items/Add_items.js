@@ -264,6 +264,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
                 }
                 <option value="available" >Available</option>
                 <option value="stockOut" >Stock Out</option>
+                <option value="new">New</option>
               </select>
               {!this.state.status?
                 <label style={{transform: 'translateY(-100%)',opacity:'0',transition: 'all .3s(-390%)'}}>Status</label>
@@ -328,7 +329,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
      
             <input type="submit" value="Add Item" style={{width:'81%'}}/>
             {
-              this.state.error && <p style={{background:'red',color:'white',fontSize:'1.3rem',padding:'4px',borderRadius:'3px',marginTop:'1rem'}}>Please fill in all fields</p>
+              this.state.error && <p style={{background:'red',color:'white',fontSize:'1.3rem',padding:'4px',borderRadius:'3px',marginTop:'1rem',width:'81%'}}>Please fill in all fields</p>
             } 
       </form>
     )
